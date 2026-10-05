@@ -2839,30 +2839,6 @@ export default {
     earlier: 'Ранее',
     pinned: 'Закреплено'
   },
-  platform: {
-    subtitle: 'Корпоративная платформа знаний на базе больших языковых моделей',
-    description: 'RAG-поиск, агентные рассуждения и Wiki-базы знаний — чтобы документы действительно понимались и приносили пользу',
-    rag: 'RAG расширенная генерация',
-    agent: 'ReAct агент',
-    wiki: 'Wiki-база знаний',
-    hybridSearch: 'Гибридный поиск',
-    multimodalParsing: 'Мультимодальный анализ документов',
-    hybridSearchEngine: 'Гибридный поиск + граф знаний',
-    ragQandA: 'Вопрос-ответ с ReAct агентом',
-    independentTenant: 'Независимое рабочее пространство',
-    fullApiAccess: 'Полный доступ к API',
-    knowledgeBaseManagement: 'Управление базой знаний',
-    carousel: {
-      agenticRagTitle: 'Agentic RAG',
-      agenticRagDesc: 'ReAct-рассуждения + вызов инструментов + многошаговое мышление',
-      hybridSearchTitle: 'Гибридная стратегия поиска',
-      hybridSearchDesc: 'BM25 + Вектор + Граф знаний',
-      wikiTitle: 'Wiki-база знаний',
-      wikiDesc: 'Дистилляция документов в структурированные связанные знания',
-      smartDocRetrievalTitle: 'Интеллектуальный поиск документов',
-      smartDocRetrievalDesc: 'Многоформатный разбор PDF/Word/изображений'
-    }
-  },
   font: {
     uiFont: 'Шрифт интерфейса',
     uiFontDescription: 'Шрифт для меню, основного текста, кнопок и большинства элементов интерфейса',
@@ -5351,11 +5327,8 @@ export default {
     haveAccount: 'Уже есть аккаунт?',
     backToLogin: 'Вернуться ко входу',
     loginHint: 'Войдите, чтобы продолжить, или создайте аккаунт ниже, если вы впервые здесь.',
-    firstTime: 'Впервые в WeKnora?',
     registerSuccess: 'Регистрация завершена. Войдите в систему',
     registerFailed: 'Ошибка регистрации',
-    subtitle: 'RAG, ReAct-агент и Wiki — корпоративный фреймворк знаний на основе больших моделей',
-    registerSubtitle: 'Создайте аккаунт и начните работу с WeKnora',
     emailPlaceholder: 'Введите адрес электронной почты',
     passwordPlaceholder: 'Введите пароль',
     confirmPasswordPlaceholder: 'Введите пароль ещё раз',

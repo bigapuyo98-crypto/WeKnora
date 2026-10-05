@@ -2839,30 +2839,6 @@ export default {
     earlier: '이전',
     pinned: '고정됨'
   },
-  platform: {
-    subtitle: '대규모 언어 모델 기반 엔터프라이즈 지식 프레임워크',
-    description: 'RAG 검색, 에이전트 추론, Wiki 지식베이스로 문서를 진정으로 이해하고 활용합니다',
-    rag: 'RAG 강화 생성',
-    agent: 'ReAct 에이전트',
-    wiki: 'Wiki 지식베이스',
-    hybridSearch: '하이브리드 검색',
-    multimodalParsing: '멀티모달 문서 파싱',
-    hybridSearchEngine: '하이브리드 검색 + 지식 그래프',
-    ragQandA: 'ReAct 에이전트 Q&A',
-    independentTenant: '독립 워크스페이스',
-    fullApiAccess: '전체 API 접근',
-    knowledgeBaseManagement: '지식베이스 관리',
-    carousel: {
-      agenticRagTitle: 'Agentic RAG',
-      agenticRagDesc: 'ReAct 추론 + 도구 호출 + 다단계 사고',
-      hybridSearchTitle: '하이브리드 검색 전략',
-      hybridSearchDesc: 'BM25 + 벡터 + 지식 그래프',
-      wikiTitle: 'Wiki 지식베이스',
-      wikiDesc: '문서를 구조화된 상호 연결 지식으로 정제',
-      smartDocRetrievalTitle: '지능형 문서 검색',
-      smartDocRetrievalDesc: 'PDF/Word/이미지 다중 형식 파싱'
-    }
-  },
   font: {
     uiFont: '인터페이스 글꼴',
     uiFontDescription: '메뉴, 본문, 버튼 등 인터페이스 대부분의 텍스트에 사용되는 글꼴입니다',
@@ -5351,11 +5327,8 @@ export default {
     haveAccount: '이미 계정이 있으신가요?',
     backToLogin: '로그인으로 돌아가기',
     loginHint: '로그인하여 계속하세요. 처음이시라면 아래에서 계정을 만드세요.',
-    firstTime: 'WeKnora가 처음이신가요?',
     registerSuccess: '가입이 완료되었습니다. 로그인해주세요',
     registerFailed: '가입 실패',
-    subtitle: 'RAG Q&A, ReAct 에이전트, Wiki 지식베이스 — 대규모 언어 모델 기반 엔터프라이즈 지식 프레임워크',
-    registerSubtitle: '계정을 만들고 WeKnora를 시작하세요',
     emailPlaceholder: '이메일 주소 입력',
     passwordPlaceholder: '비밀번호 입력',
     confirmPasswordPlaceholder: '비밀번호 다시 입력',

@@ -2841,30 +2841,6 @@ export default {
     earlier: '更早',
     pinned: '已置顶'
   },
-  platform: {
-    subtitle: '大模型驱动的企业级知识框架',
-    description: 'RAG 检索、智能体推理、Wiki 知识库，让文档真正被理解和运用',
-    rag: 'RAG 增强生成',
-    agent: 'ReAct 智能体',
-    wiki: 'Wiki 知识库',
-    hybridSearch: '混合检索',
-    multimodalParsing: '多模态文档解析',
-    hybridSearchEngine: '混合检索 + 知识图谱',
-    ragQandA: 'ReAct 智能体问答',
-    independentTenant: '独立空间',
-    fullApiAccess: '完整 API 访问',
-    knowledgeBaseManagement: '知识库管理',
-    carousel: {
-      agenticRagTitle: 'Agentic RAG',
-      agenticRagDesc: 'ReAct 推理 + 工具调用 + 多步思考',
-      hybridSearchTitle: '混合检索策略',
-      hybridSearchDesc: 'BM25 + 向量 + 知识图谱',
-      wikiTitle: 'Wiki 知识库',
-      wikiDesc: '文档蒸馏为结构化互联知识',
-      smartDocRetrievalTitle: '智能文档检索',
-      smartDocRetrievalDesc: 'PDF/Word/图片多格式解析'
-    }
-  },
   font: {
     uiFont: '界面字体',
     uiFontDescription: '用于菜单、正文、按钮等界面大部分文字的字体',
@@ -5353,11 +5329,8 @@ export default {
     haveAccount: '已有账户？',
     backToLogin: '返回登录',
     loginHint: '登录以继续使用；首次使用请在下方创建账户。',
-    firstTime: '首次使用 WeKnora？',
     registerSuccess: '注册成功，请登录',
     registerFailed: '注册失败',
-    subtitle: 'RAG 问答、ReAct 智能体与 Wiki 知识库，大模型驱动的企业级知识框架',
-    registerSubtitle: '创建账户并开始使用 WeKnora',
     emailPlaceholder: '输入邮箱地址',
     passwordPlaceholder: '输入密码',
     confirmPasswordPlaceholder: '再次输入密码',

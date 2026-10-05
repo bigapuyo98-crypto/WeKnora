@@ -2672,11 +2672,8 @@ export default {
     haveAccount: 'Already have an account?',
     backToLogin: 'Back to Login',
     loginHint: 'Sign in to continue, or create an account below if this is your first time.',
-    firstTime: 'New to WeKnora?',
     registerSuccess: 'Registration successful. Please sign in',
     registerFailed: 'Registration failed',
-    subtitle: 'RAG Q&A, ReAct Agent and Wiki — an LLM-powered enterprise knowledge framework',
-    registerSubtitle: 'Create your account and start using WeKnora',
     emailPlaceholder: 'Enter email address',
     passwordPlaceholder: 'Enter password',
     confirmPasswordPlaceholder: 'Enter password again',
@@ -5180,30 +5177,6 @@ export default {
       small: 'Small',
       normal: 'Normal',
       large: 'Large'
-    }
-  },
-  platform: {
-    subtitle: 'LLM-Powered Enterprise Knowledge Framework',
-    description: 'RAG retrieval, agentic reasoning and Wiki knowledge bases — so your documents are truly understood and put to work',
-    rag: 'RAG Enhanced Generation',
-    agent: 'ReAct Agent',
-    wiki: 'Wiki Knowledge Base',
-    hybridSearch: 'Hybrid Search',
-    multimodalParsing: 'Multimodal Document Parsing',
-    hybridSearchEngine: 'Hybrid Search + Knowledge Graph',
-    ragQandA: 'ReAct Agent Q&A',
-    independentTenant: 'Independent Workspace',
-    fullApiAccess: 'Full API Access',
-    knowledgeBaseManagement: 'Knowledge Base Management',
-    carousel: {
-      agenticRagTitle: 'Agentic RAG',
-      agenticRagDesc: 'ReAct reasoning + tool calls + multi-step thinking',
-      hybridSearchTitle: 'Hybrid search strategy',
-      hybridSearchDesc: 'BM25 + Vector + Knowledge Graph',
-      wikiTitle: 'Wiki Knowledge Base',
-      wikiDesc: 'Distills documents into structured, interlinked knowledge',
-      smartDocRetrievalTitle: 'Intelligent document retrieval',
-      smartDocRetrievalDesc: 'PDF/Word/Image multi-format parsing'
     }
   },
   time: {

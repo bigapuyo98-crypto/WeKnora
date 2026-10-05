@@ -2672,11 +2672,8 @@ export default {
     haveAccount: 'すでにアカウントをお持ちですか？',
     backToLogin: 'ログインに戻る',
     loginHint: 'ログインして続行してください。初めての方は下からアカウントを作成できます。',
-    firstTime: 'WeKnoraは初めてですか？',
     registerSuccess: '登録が完了しました。ログインしてください',
     registerFailed: '登録に失敗しました',
-    subtitle: 'RAG質問応答、ReActエージェント、Wiki。LLMが支える企業向けナレッジフレームワーク',
-    registerSubtitle: 'アカウントを作成してWeKnoraを使い始めましょう',
     emailPlaceholder: 'メールアドレスを入力',
     passwordPlaceholder: 'パスワードを入力',
     confirmPasswordPlaceholder: 'パスワードを再入力',
@@ -5180,30 +5177,6 @@ export default {
       small: '小',
       normal: '標準',
       large: '大'
-    }
-  },
-  platform: {
-    subtitle: 'LLM駆動のエンタープライズ向けナレッジフレームワーク',
-    description: 'RAG検索、エージェント推論、Wikiナレッジベースにより、ドキュメントを本当に理解し活用できます',
-    rag: 'RAG拡張生成',
-    agent: 'ReActエージェント',
-    wiki: 'Wikiナレッジベース',
-    hybridSearch: 'ハイブリッド検索',
-    multimodalParsing: 'マルチモーダルドキュメント解析',
-    hybridSearchEngine: 'ハイブリッド検索 + ナレッジグラフ',
-    ragQandA: 'ReActエージェントQ&A',
-    independentTenant: '独立したワークスペース',
-    fullApiAccess: 'フルAPIアクセス',
-    knowledgeBaseManagement: 'ナレッジベース管理',
-    carousel: {
-      agenticRagTitle: 'エージェンティックRAG',
-      agenticRagDesc: 'ReAct推論 + ツール呼び出し + 多段階の思考',
-      hybridSearchTitle: 'ハイブリッド検索戦略',
-      hybridSearchDesc: 'BM25 + ベクトル + ナレッジグラフ',
-      wikiTitle: 'Wikiナレッジベース',
-      wikiDesc: 'ドキュメントを構造化され相互にリンクしたナレッジへ凝縮します',
-      smartDocRetrievalTitle: 'インテリジェントなドキュメント検索',
-      smartDocRetrievalDesc: 'PDF/Word/画像のマルチフォーマット解析'
     }
   },
   time: {
