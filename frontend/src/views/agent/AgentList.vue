@@ -12,7 +12,7 @@
               <ResourceSortControl v-model="selectedResourceSort" />
               <t-tooltip v-if="authStore.hasRole('contributor')" :content="$t('agent.createAgent')" placement="bottom">
                 <t-button variant="text" theme="default" size="small" class="header-action-btn"
-                  data-guide="agent-list-create" style="--wails-draggable: no-drag" @click="handleCreateAgent">
+                  style="--wails-draggable: no-drag" @click="handleCreateAgent">
                   <template #icon>
                     <span class="btn-icon-wrapper">
                       <svg class="sparkles-icon" width="19" height="19" viewBox="0 0 20 20" fill="none"
@@ -593,7 +593,7 @@
           :description="$t('agent.empty.description')">
           <template #icon><ResourceIcon type="agent" :size="32" /></template>
           <t-button v-if="authStore.hasRole('contributor')" theme="primary" class="agent-create-btn"
-            data-guide="agent-list-create" @click="handleCreateAgent">
+            @click="handleCreateAgent">
             <template #icon>
               <span class="btn-icon-wrapper">
                 <svg class="sparkles-icon" width="18" height="18" viewBox="0 0 20 20" fill="none"
@@ -730,9 +730,6 @@
       :initialHighlightField="editorInitialHighlightField"
       :readOnly="editorMode === 'edit' && editingAgent != null && !canManageAgent(editingAgent as AgentWithUI)"
       @update:visible="editorVisible = $event" @success="handleEditorSuccess" />
-
-    <TenantModelsGuide :when="showAgentTenantModelsGuide" variant="agent" />
-    <ContextualGuide tour="agentList" :when="showAgentListContextualGuide" />
   </div>
 </template>
 
@@ -753,9 +750,7 @@ import { useSettingsStore } from '@/stores/settings'
 import { useMenuStore } from '@/stores/menu'
 import type { SharedAgentInfo, OrganizationSharedAgentItem } from '@/api/organization'
 import AgentEditorModal from './AgentEditorModal.vue'
-import ContextualGuide from '@/components/ContextualGuide.vue'
-import TenantModelsGuide from '@/components/TenantModelsGuide.vue'
-import { focusAgentEditorSection, markContextualGuideDone } from '@/config/contextualGuides'
+import { focusAgentEditorSection } from '@/config/contextualGuides'
 import { useTenantModelReadiness } from '@/composables/useTenantModelReadiness'
 import { useUIStore } from '@/stores/ui'
 import AgentAvatar from '@/components/AgentAvatar.vue'
@@ -1047,14 +1042,6 @@ const showAgentListEmpty = computed(() => {
   if (spaceSelection.value === 'mine' && agents.value.length === 0) return true
   return false
 })
-
-const showAgentTenantModelsGuide = computed(
-  () => modelsReadyLoaded.value && showAgentListEmpty.value && !isReadyForAgent.value,
-)
-
-const showAgentListContextualGuide = computed(
-  () => showAgentListEmpty.value && isReadyForAgent.value && !editorVisible.value,
-)
 
 const applyAgentListData = (res: { data: CustomAgent[]; disabled_own_agent_ids: string[] }) => {
   const disabledOwnIds = res.disabled_own_agent_ids || []
@@ -1532,7 +1519,6 @@ const handleCreateAgent = () => {
     uiStore.openSettings('models')
     return
   }
-  markContextualGuideDone('agentList')
   openCreateModal()
 }
 

@@ -28,7 +28,6 @@
           variant="text"
           theme="default"
           :class="['kb-upload-source-trigger', triggerClass]"
-          :data-guide="dataGuide || undefined"
           :aria-label="tooltipText"
           size="small"
         >
@@ -79,7 +78,6 @@ const props = withDefaults(defineProps<{
   triggerIcon?: string
   triggerLabel?: string
   triggerClass?: string
-  dataGuide?: string
   tooltip?: string
   placement?: 'top' | 'bottom' | 'bottom-right' | 'bottom-left'
 }>(), {
@@ -88,7 +86,6 @@ const props = withDefaults(defineProps<{
   includeManual: false,
   triggerIcon: 'file-add',
   triggerClass: '',
-  dataGuide: '',
   tooltip: '',
   placement: 'bottom-right',
 })

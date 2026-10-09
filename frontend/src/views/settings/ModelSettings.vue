@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <t-tabs v-model="activeTypeFilter" class="model-type-tabs" data-guide="settings-models">
+    <t-tabs v-model="activeTypeFilter" class="model-type-tabs">
       <t-tab-panel value="all" :label="`${$t('common.all')}(${allLegacyModels.length})`" />
       <t-tab-panel value="chat" :label="`${$t('modelSettings.typeShort.chat')}(${countByType('chat')})`" />
       <t-tab-panel value="embedding"
@@ -146,7 +146,6 @@
           v-if="authStore.hasRole('admin')"
           type="button"
           class="model-card model-card--add"
-          data-guide="settings-add-model"
           @click="openAddDialog"
         >
           <span class="model-card--add__icon" aria-hidden="true">

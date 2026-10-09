@@ -56,10 +56,6 @@ const TEMPLATE_KEY_PATTERNS = [
 ] as const
 const METADATA_KEY_PATTERNS = [
   /\b(?:labelKey|hintKey|titleKey|i18nKey)\s*:\s*['"]([^'"]+)['"]/g,
-  /\bstepI18nPrefix\s*:\s*['"]([^'"]+)['"]/g,
-] as const
-const STEP_PREFIX_PATTERNS = [
-  /step-i18n-prefix=["']([^"']+)["']/g,
 ] as const
 const TM_KEY_PATTERNS = [
   /(?<![.\w])tm\(\s*['"]([^'"]+)['"]/g,
@@ -79,15 +75,6 @@ const EXTRA_PREFIXES = [
   'knowledgeEditor.activity.actions.',
   'knowledgeEditor.activity.targets.',
   'tenantMember.audit.action.',
-  'newUserGuide.steps.',
-  'contextualGuide.kbList.steps.',
-  'contextualGuide.kbCreate.steps.',
-  'contextualGuide.tenantModels.steps.',
-  'contextualGuide.tenantModels.stepsAgent.',
-  'contextualGuide.kbDetail.steps.',
-  'contextualGuide.chat.steps.',
-  'contextualGuide.agentList.steps.',
-  'contextualGuide.agentCreate.steps.',
   'datasource.syncError.',
   'kbSettings.parser.engines.',
   'model.editor.description.',
@@ -119,8 +106,6 @@ const EXTRA_PREFIXES = [
 
 /** Keys that must survive pruning even when static analysis misses them. */
 export const CRITICAL_LOCALE_KEYS = [
-  'newUserGuide.steps.welcome.title',
-  'contextualGuide.kbList.steps.create.title',
   'tenantMember.audit.action.rbac.member_added',
   'system.globalSettings.audit.action.system.setting_changed',
   'knowledgeEditor.activity.targets.knowledge_base',
@@ -310,14 +295,6 @@ export function collectI18nUsageFromSources(rootDir = SOURCE_ROOT): I18nUsage {
         const key = match[1]
         if (key.includes('.steps')) addPrefix(usage, key)
         else if (isStaticTranslationKey(key)) usage.staticKeys.add(key)
-      }
-    }
-
-    for (const pattern of STEP_PREFIX_PATTERNS) {
-      pattern.lastIndex = 0
-      let match: RegExpExecArray | null
-      while ((match = pattern.exec(content)) !== null) {
-        addPrefix(usage, match[1])
       }
     }
 

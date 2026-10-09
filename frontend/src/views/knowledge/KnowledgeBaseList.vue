@@ -12,7 +12,7 @@
               <ResourceSortControl v-model="selectedResourceSort" />
               <t-tooltip v-if="authStore.hasRole('contributor')" :content="$t('knowledgeList.create')" placement="bottom">
                  <t-button variant="text" theme="default" size="small" class="header-action-btn"
-                   data-guide="kb-list-create" style="--wails-draggable: no-drag" @click="handleCreateKnowledgeBase">
+                   style="--wails-draggable: no-drag" @click="handleCreateKnowledgeBase">
                    <template #icon><t-icon name="folder-add" size="16px" /></template>
                   {{ $t('knowledgeList.create') }}
                  </t-button>
@@ -596,7 +596,7 @@
           :description="$t('knowledgeList.empty.description')">
           <template #icon><ResourceIcon type="knowledge" :size="32" /></template>
           <t-button v-if="authStore.hasRole('contributor')" theme="primary" class="kb-create-btn"
-            data-guide="kb-list-create" @click="handleCreateKnowledgeBase">
+            @click="handleCreateKnowledgeBase">
             <template #icon><t-icon name="folder-add" /></template>
             {{ $t('knowledgeList.create') }}
           </t-button>
@@ -616,7 +616,7 @@
           :description="$t('knowledgeList.empty.description')">
           <template #icon><ResourceIcon type="knowledge" :size="32" /></template>
           <t-button v-if="authStore.hasRole('contributor')" theme="primary" class="kb-create-btn"
-            data-guide="kb-list-create" @click="handleCreateKnowledgeBase">
+            @click="handleCreateKnowledgeBase">
             <template #icon><t-icon name="folder-add" /></template>
             {{ $t('knowledgeList.create') }}
           </t-button>
@@ -702,8 +702,6 @@
         </div>
       </Transition>
     </Teleport>
-
-    <ContextualGuide tour="kbList" :when="showKbListContextualGuide" />
   </div>
 </template>
 
@@ -729,9 +727,7 @@ import { matchesResourceQuery } from '@/utils/resourceListSearch'
 import ResourceOriginBadge from '@/components/ResourceOriginBadge.vue'
 import { shouldShowResourceOriginBadge } from '@/utils/card-list-badge'
 import { permissionCanManageKB } from '@/utils/kbPermission'
-import ContextualGuide from '@/components/ContextualGuide.vue'
 import ResourceSortControl from '@/components/ResourceSortControl.vue'
-import { isContextualGuideDone, markContextualGuideDone } from '@/config/contextualGuides'
 import { useTenantModelReadiness } from '@/composables/useTenantModelReadiness'
 import { useI18n } from 'vue-i18n'
 import { useListUrlState } from '@/composables/useListUrlState'
@@ -1112,10 +1108,6 @@ const showKbListEmpty = computed(() => {
   return false
 })
 
-const showKbListContextualGuide = computed(
-  () => showKbListEmpty.value && !uiStore.showKBEditorModal,
-)
-
 const applyKbListData = (data: any[]) => {
   kbs.value = data.map((kb: any) => ({
     ...kb,
@@ -1489,7 +1481,6 @@ const goSettings = (id: string) => {
 
 // 创建知识库
 const handleCreateKnowledgeBase = () => {
-  markContextualGuideDone('kbList')
   // 无模型时仍打开创建向导，并定位到模型配置页；用户可在向导内添加模型，无需先跳转系统设置
   const initialSection =
     modelsReadyLoaded.value && !isReadyForDocumentKb.value ? 'models' : undefined
@@ -1499,13 +1490,9 @@ const handleCreateKnowledgeBase = () => {
 // 知识库编辑器成功回调（创建或编辑成功）
 const handleKBEditorSuccess = (kbId: string) => {
   console.log('[KnowledgeBaseList] knowledge operation success:', kbId)
-  const shouldOpenDetailForUploadGuide = !isContextualGuideDone('kbDetail')
   // 列表页编辑同样要让单 KB 详情缓存失效，否则侧栏 / 详情页 60s 内仍显示旧信息
   chatResources.invalidateKnowledgeBaseDetail(kbId)
   fetchList(true).then(() => {
-    if (shouldOpenDetailForUploadGuide && kbId && !uiStore.showKBEditorModal) {
-      goDetail(kbId)
-    }
     // 如果是从路由参数中获取的高亮ID，触发闪烁效果
     if (route.query.highlightKbId === kbId) {
       triggerHighlightFlash(kbId)

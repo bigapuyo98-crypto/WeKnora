@@ -1991,7 +1991,6 @@ export default {
       agents: '打开智能体',
       organizations: '打开共享空间',
       settings: '打开设置',
-      productTour: '新手引导'
     },
     match: {
       vector: '向量',
@@ -2889,7 +2888,6 @@ export default {
     title: '常规设置',
     allSettings: '全部设置',
     personalSettings: '个人设置',
-    helpAndDocs: '帮助与文档',
     description: '配置语言、外观等基础选项',
     settings: '设置',
     close: '关闭设置'
@@ -5044,7 +5042,7 @@ export default {
     }
   },
   createChat: {
-    title: 'Hi，我是 WeKnora，让你的知识触手可及',
+    title: 'Hi，我是 X，让你的知识触手可及',
     newSessionTitle: '新会话',
     openProject: '选择项目',
     clearProject: '取消绑定',
@@ -7399,245 +7397,9 @@ export default {
     deleteFailed: '删除失败，请稍后再试'
   },
   contextualGuide: {
-    stepOf: '{current} / {total}',
-    skip: '跳过',
-    prev: '上一步',
-    next: '下一步',
-    done: '知道了',
-    interactHint: '请直接点击高亮区域继续',
-    chat: {
-      steps: {
-        done: {
-          title: '开始探索吧',
-          desc: '试试提一个与已上传文档相关的问题，体验带引用的精准回答。'
-        },
-        send: {
-          title: '发送开始对话',
-          desc: '发送后将创建新会话，AI 会结合知识库内容作答，并标注引用片段。'
-        },
-        input: {
-          title: '输入你的问题',
-          desc: '直接描述你想了解的内容；也可点击上方推荐问题快速开始。'
-        },
-        kb: {
-          title: '选择知识范围',
-          desc: '点击 {\'@\'} 可指定一个或多个知识库/文件，仅基于选中内容回答；不选则按当前智能体配置检索。'
-        }
-      }
-    },
-    kbDetail: {
-      steps: {
-        done: {
-          title: '解析完成后即可使用',
-          desc: '文档解析入库后，可在对话中 {\'@\'} 本知识库提问，回答会附带引用来源。'
-        },
-        upload: {
-          title: '添加文档',
-          desc: '点击此处上传文件、文件夹，或导入网页与在线编辑内容。'
-        },
-        intro: {
-          title: '知识库还是空的',
-          desc: '添加第一份资料后，才能基于它进行检索与对话。支持拖拽上传多种文档格式。'
-        }
-      }
-    },
-    agentCreate: {
-      steps: {
-        submit: {
-          title: '保存智能体',
-          desc: '确认配置后点击高亮的「确定」完成创建，即可在对话中选择该智能体。'
-        },
-        navTools: {
-          title: '工具与 MCP（可选）',
-          desc: '智能推理模式下可勾选内置工具、MCP 服务等，扩展搜索、计算等能力。'
-        },
-        multimodal: {
-          title: '启用附件上传',
-          desc: '可分别配置图片、音频上传及附件解析策略；启用图片上传时需在下方选择 VLM 模型。'
-        },
-        navMultimodal: {
-          title: '附件上传（可选）',
-          desc: '开启后，对话中可上传图片、文档、音频等附件；图片理解需先在系统设置中配置 VLLM 模型。'
-        },
-        navWebsearch: {
-          title: '联网搜索（可选）',
-          desc: '配置是否允许智能体调用外部搜索引擎补充实时信息。'
-        },
-        knowledge: {
-          title: '知识库范围',
-          desc: '「全部」适合通用助手；「指定」可限定专业领域；「不关联」则仅依赖模型自身能力或联网搜索。'
-        },
-        navKnowledge: {
-          title: '关联知识库',
-          desc: '决定智能体可检索哪些知识。默认「全部知识库」，也可改为指定库或暂不关联。'
-        },
-        model: {
-          title: '选择模型',
-          desc: '从下拉列表选择已配置的对话模型；没有合适模型时请先到系统设置添加。'
-        },
-        navModel: {
-          title: '绑定对话模型',
-          desc: '每个智能体必须指定一个 KnowledgeQA 模型作为推理引擎。'
-        },
-        name: {
-          title: '命名与描述',
-          desc: '取一个易识别的名称。智能推理模式下系统可能已预填默认名称，可按需修改。'
-        },
-        agentType: {
-          title: '选择智能体类型',
-          desc: '预设类型会自动填充系统提示词、推荐工具与知识库范围（如 Wiki 构建、数据分析等）。可按场景切换，名称与描述会随之更新。'
-        },
-        mode: {
-          title: '选择运行模式',
-          desc: '「普通模式」适合固定流程的快速问答；「智能推理」可调用工具、多步思考，适合复杂任务。'
-        }
-      }
-    },
-    agentList: {
-      steps: {
-        create: {
-          title: '创建你的智能体',
-          desc: '智能体把模型、知识库、工具与提示词组合成可复用的对话助手。点击下方高亮的「创建智能体」开始配置。'
-        }
-      }
-    },
-    kbCreate: {
-      steps: {
-        submit: {
-          title: '创建知识库',
-          desc: '点击「知道了」结束引导，无需现在创建知识库。准备好后，填写名称、确认类型与模型，再点击「创建」。'
-        },
-        faq: {
-          title: 'FAQ 索引方式',
-          desc: '配置问答对的索引模式。创建后可在本页继续添加 FAQ 条目。'
-        },
-        multimodalVllm: {
-          title: '选择 VLM 模型',
-          desc: '开启多模态后需指定 VLM（视觉语言模型）。若列表为空，请先在系统设置中添加 VLLM 类型模型。'
-        },
-        multimodalToggle: {
-          title: '开启多模态解析',
-          desc: '启用后，上传的图片类文档将使用视觉语言模型提取内容，便于检索与问答。'
-        },
-        navMultimodal: {
-          title: '多模态 / 图片理解（可选）',
-          desc: '若文档含大量图表、扫描件或需理解图片内容，可在此开启多模态并选择 VLM 模型。'
-        },
-        storage: {
-          title: '存储引擎（可选）',
-          desc: '原始文件存放位置（本地或对象存储）。默认跟随空间设置即可。'
-        },
-        chunking: {
-          title: '分块策略（可选）',
-          desc: '决定文档如何切分为检索片段。默认分块大小已针对 RAG 优化，一般无需修改。'
-        },
-        parser: {
-          title: '解析引擎（可选）',
-          desc: '控制 PDF、Office 等文件的解析方式。默认配置适用于大多数场景，有 OCR 需求时可在此调整。'
-        },
-        embedding: {
-          title: 'Embedding 模型',
-          desc: '将文本转为向量以支持语义检索。与上方索引策略中的「向量/关键词检索」配合使用。'
-        },
-        llm: {
-          title: '对话 / 摘要模型',
-          desc: '用于文档摘要、问答生成等。若列表为空，请通过下拉菜单前往系统设置添加模型。'
-        },
-        navModels: {
-          title: '配置模型（必填）',
-          desc: '知识库必须绑定对话模型；开启检索时还需 Embedding 模型。点击左侧「模型配置」进入。'
-        },
-        indexing: {
-          title: '选择索引能力',
-          desc: '默认已开启向量与关键词检索，可按需开启 Wiki 结构化索引或知识图谱。至少保留一种检索方式。'
-        },
-        name: {
-          title: '填写名称',
-          desc: '取一个便于识别的名称，例如「产品手册」或「客服 FAQ」。描述可选填。'
-        },
-        type: {
-          title: '选择知识库类型',
-          desc: '文档库适合上传 PDF、Word 等文件；FAQ 库适合问答对。创建后类型不可更改，请按需选择。'
-        }
-      }
-    },
     tenantModels: {
       needChatModelFirst: '请先添加对话模型（KnowledgeQA），再创建智能体。',
-      stepsAgent: {
-        done: {
-          title: '然后创建智能体',
-          desc: '保存并关闭设置后，点击「创建智能体」，向导会带你配置模式、知识库与附件上传等选项。'
-        },
-        addModel: {
-          title: '添加对话模型',
-          desc: '点击「添加模型」，选择 KnowledgeQA 类型并填写接入信息。'
-        },
-        intro: {
-          title: '需要先配置对话模型',
-          desc: '创建智能体至少需要一种 KnowledgeQA（对话）模型。请先在系统设置中添加；Embedding 模型仅创建知识库时需要。'
-        }
-      },
-      steps: {
-        done: {
-          title: '添加完成后继续',
-          desc: '模型保存后关闭设置页，即可点击「新建知识库」；创建向导会引导你完成类型、索引与模型绑定。'
-        },
-        addModel: {
-          title: '添加模型',
-          desc: '点击「添加模型」，分别配置 KnowledgeQA（对话）与 Embedding 类型。Lite 用户可使用 Ollama 拉取本地模型。'
-        },
-        intro: {
-          title: '需要先配置模型',
-          desc: '创建文档知识库至少需要：一个对话模型（用于摘要与问答）和一个 Embedding 模型（用于向量检索）。请先在系统设置中添加。'
-        }
-      }
     },
-    kbList: {
-      steps: {
-        create: {
-          title: '创建第一个知识库',
-          desc: '知识库用来存放文档与 FAQ。点击下方高亮的「新建知识库」按钮，我们会带你完成表单填写。'
-        }
-      }
-    }
-  },
-  newUserGuide: {
-    stepOf: '{current} / {total}',
-    skip: '跳过引导',
-    prev: '上一步',
-    next: '下一步',
-    done: '完成',
-    reopen: '新手引导',
-    steps: {
-      done: {
-        title: '一切就绪',
-        desc: '你已经了解了核心功能，现在就开始构建你的知识助手吧！随时可点击菜单顶部昵称旁的帮助按钮重新查看引导。'
-      },
-      models: {
-        title: '配置你的模型',
-        desc: '这是关键一步：在模型管理中添加对话、向量等模型，知识库与对话功能才能正常工作。点击「添加模型」即可开始配置。'
-      },
-      settings: {
-        title: '账户与设置入口',
-        desc: '点开这里可以管理账户、成员与系统设置。需要再次查看本引导时，可点击菜单顶部昵称旁的帮助按钮重新打开。'
-      },
-      agents: {
-        title: '打造专属智能体',
-        desc: '把知识库、提示词与工具组合成可复用的智能体，沉淀你的专业能力。'
-      },
-      chat: {
-        title: '发起智能对话',
-        desc: '基于知识库内容向 AI 提问，获得带引用来源的精准回答。点击这里开始新对话。'
-      },
-      knowledge: {
-        title: '创建你的知识库',
-        desc: '知识库是一切的起点：上传文档、网页或 FAQ，WeKnora 会自动解析并建立索引。点击这里进入知识库。'
-      },
-      welcome: {
-        title: '欢迎使用 WeKnora',
-        desc: '只需几步，带你快速了解知识库、对话与智能体的核心用法。点击「下一步」开始。'
-      }
-    }
   },
   chatHeader: {
     moreActions: '更多对话操作',

@@ -241,6 +241,26 @@ func (c *Client) extractToolCallMetadata(raw json.RawMessage) types.ToolCallMeta
 }
 
 func (c *Client) parseResponse(raw []byte) (*types.ChatResponse, error) {
+	if c.cfg.Settings.SuccessDataEnvelope {
+		var envelope struct {
+			Success *bool           `json:"success"`
+			Data    json.RawMessage `json:"data"`
+			Error   json.RawMessage `json:"error"`
+		}
+		if err := json.Unmarshal(raw, &envelope); err != nil {
+			return nil, fmt.Errorf("decode success/data response: %w", err)
+		}
+		if envelope.Success == nil || !*envelope.Success {
+			return nil, fmt.Errorf("API success/data response did not declare success")
+		}
+		if len(envelope.Error) > 0 && strings.TrimSpace(string(envelope.Error)) != "null" {
+			return nil, fmt.Errorf("API success/data response contains an error")
+		}
+		if len(envelope.Data) == 0 || strings.TrimSpace(string(envelope.Data)) == "null" {
+			return nil, fmt.Errorf("API success/data response has no data")
+		}
+		raw = envelope.Data
+	}
 	var env rawEnvelope
 	if err := json.Unmarshal(raw, &env); err != nil {
 		return nil, fmt.Errorf("decode response: %w", err)

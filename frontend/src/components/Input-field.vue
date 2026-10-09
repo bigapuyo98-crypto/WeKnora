@@ -2715,7 +2715,7 @@ defineExpose({
         </div>
       </div>
     </div>
-    <div class="rich-input-container" data-guide="chat-input">
+    <div class="rich-input-container">
       <!-- 图片预览区域 -->
       <div v-if="uploadedImages.length > 0" class="image-preview-bar">
         <div v-for="(img, idx) in uploadedImages" :key="idx" class="image-preview-item">
@@ -2886,7 +2886,7 @@ defineExpose({
                   allSelectedItems.length
               }) : $t('input.knowledgeBase') }}</span>
             </template>
-            <div ref="atButtonRef" class="control-btn kb-btn" data-guide="chat-kb-mention" :class="{
+            <div ref="atButtonRef" class="control-btn kb-btn" :class="{
               'active': allSelectedItems.length > 0,
               'disabled': isMentionDisabled
             }" @click.stop @mousedown.prevent="triggerMention">
@@ -2996,7 +2996,7 @@ defineExpose({
             </button>
           </t-tooltip>
           <t-tooltip v-else :content="`${isReplying && canSteer ? $t('input.steerAfter') : $t('input.send')} · Enter`">
-            <button type="button" @click="createSession(query)" class="control-btn send-btn" data-guide="chat-send"
+            <button type="button" @click="createSession(query)" class="control-btn send-btn"
               :disabled="!query.trim() || composerLocked" :class="{ 'disabled': !query.trim() || composerLocked }"
               :aria-label="isReplying && canSteer ? $t('input.steerAfter') : $t('input.send')">
               <t-icon name="arrow-up" />

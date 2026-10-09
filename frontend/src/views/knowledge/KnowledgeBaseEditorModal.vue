@@ -2,7 +2,7 @@
   <SettingsModalShell :visible="visible"
     :title="editorMode === 'create' ? $t('knowledgeEditor.titleCreate') : $t('knowledgeEditor.titleEdit')"
     v-model="currentSection" :nav-groups="navGroups" :loading="loading" :z-index="1000"
-    nav-guide="kb-editor-sidebar" nav-item-guide-prefix="kb-editor-nav" @close="modalShell.requestClose">
+    @close="modalShell.requestClose">
     <div class="content-wrapper">
       <!-- 基本信息 -->
       <div v-show="currentSection === 'basic'" class="section">
@@ -31,7 +31,6 @@
               <t-radio-group
                 v-model="formData.type"
                 :disabled="editorMode === 'edit'"
-                data-guide="kb-create-type"
               >
                 <t-radio-button value="document">{{ $t('knowledgeEditor.basic.typeDocument') }}</t-radio-button>
                 <t-radio-button value="faq">{{ $t('knowledgeEditor.basic.typeFAQ') }}</t-radio-button>
@@ -43,8 +42,7 @@
             <div v-if="!isFAQ" class="form-item">
               <label class="form-label required">{{ $t('knowledgeEditor.indexing.title') }}</label>
               <p class="form-tip">{{ $t('knowledgeEditor.indexing.description') }}</p>
-              <div class="indexing-checks" :class="{ 'is-locked': isIndexingLocked }"
-                data-guide="kb-create-indexing">
+              <div class="indexing-checks" :class="{ 'is-locked': isIndexingLocked }">
                 <div
                   class="indexing-check-item"
                   :class="{ 'is-checked': formData.indexingStrategy.vectorEnabled, 'is-disabled': isIndexingLocked }"
@@ -124,7 +122,7 @@
               />
             </div>
 
-            <div class="form-item" data-guide="kb-create-name">
+            <div class="form-item">
               <label class="form-label required">{{ $t('knowledgeEditor.basic.nameLabel') }}</label>
               <t-input
                 v-model="formData.name"
@@ -303,7 +301,7 @@
 
           <div class="settings-group">
             <!-- 多模态开关 -->
-            <div class="setting-row" data-guide="kb-create-multimodal-toggle">
+            <div class="setting-row">
               <div class="setting-info">
                 <label>{{ $t('knowledgeEditor.advanced.multimodal.label') }}</label>
                 <p class="desc">{{ $t('knowledgeEditor.advanced.multimodal.description') }}</p>
@@ -318,8 +316,7 @@
             </div>
 
             <!-- VLLM 模型选择（多模态启用时） -->
-            <div v-if="formData.multimodalConfig.enabled" class="setting-row"
-              data-guide="kb-create-multimodal-vllm">
+            <div v-if="formData.multimodalConfig.enabled" class="setting-row">
               <div class="setting-info">
                 <label>{{ $t('knowledgeEditor.advanced.multimodal.vllmLabel') }} <span class="required">*</span></label>
                 <p class="desc">{{ $t('knowledgeEditor.advanced.multimodal.vllmDescription') }}</p>
@@ -538,22 +535,18 @@
         <t-button theme="default" variant="outline" @click="modalShell.requestClose">
           {{ $t('common.cancel') }}
         </t-button>
-        <t-button theme="primary" data-guide="kb-create-submit" @click="handleSubmit" :loading="saving"
+        <t-button theme="primary" @click="handleSubmit" :loading="saving"
           :disabled="loading">
           {{ saveButtonLabel }}
         </t-button>
       </template>
     </template>
   </SettingsModalShell>
-
-  <KbCreateContextualGuide :when="visible && editorMode === 'create'" :is-faq="isFAQ"
-    :needs-embedding="kbCreateNeedsEmbedding" />
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import KbCreateContextualGuide from '@/components/KbCreateContextualGuide.vue'
-import { KB_EDITOR_FOCUS_SECTION_EVENT, markContextualGuideDone } from '@/config/contextualGuides'
+import { KB_EDITOR_FOCUS_SECTION_EVENT } from '@/config/contextualGuides'
 import { MessagePlugin, DialogPlugin } from 'tdesign-vue-next'
 import { useModalShell } from '@/composables/useModalShell'
 import SettingsModalShell from '@/components/SettingsModalShell.vue'
@@ -829,12 +822,6 @@ const advancedSettingsRef = ref<InstanceType<typeof KBAdvancedSettings>>()
 // 表单数据
 const formData = ref<any>(null)
 const isFAQ = computed(() => formData.value?.type === 'faq')
-
-const kbCreateNeedsEmbedding = computed(() => {
-  if (!formData.value || formData.value.type === 'faq') return false
-  const s = formData.value.indexingStrategy
-  return Boolean(s?.vectorEnabled || s?.keywordEnabled)
-})
 
 const applyDefaultModelsIfEmpty = () => {
   if (!formData.value || editorMode.value !== 'create') return
@@ -1614,7 +1601,6 @@ const doSubmit = async () => {
       currentSection.value = 'basic'
       await loadKBData(createdKbId)
       MessagePlugin.success(t('knowledgeEditor.messages.createSuccess'))
-      markContextualGuideDone('kbCreate')
       emit('success', createdKbId)
     } else {
       // 编辑模式：分别更新基本信息和配置

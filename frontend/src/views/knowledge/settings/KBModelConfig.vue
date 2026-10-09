@@ -7,7 +7,7 @@
 
     <div class="settings-group">
       <!-- LLM 大语言模型 -->
-      <div class="setting-row" data-guide="kb-create-llm">
+      <div class="setting-row">
         <div class="setting-info">
           <label>{{ $t('knowledgeEditor.models.llmLabel') }} <span class="required">*</span></label>
           <p class="desc">{{ $t('knowledgeEditor.models.llmDesc') }}</p>
@@ -26,7 +26,7 @@
       </div>
 
       <!-- Embedding 嵌入模型: RAG 检索启用时必填; 纯 Wiki 时可选(用于目录归类相似度) -->
-      <div v-if="ragEnabled !== false || wikiEnabled" class="setting-row" data-guide="kb-create-embedding">
+      <div v-if="ragEnabled !== false || wikiEnabled" class="setting-row">
         <div class="setting-info">
           <label>
             {{ $t('knowledgeEditor.models.embeddingLabel') }}
@@ -224,4 +224,3 @@ const handleAddModel = (subSection: string) => {
   align-items: flex-start;
 }
 </style>
-

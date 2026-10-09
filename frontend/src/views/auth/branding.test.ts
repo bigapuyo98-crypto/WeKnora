@@ -28,7 +28,7 @@ test('shared navigation omits the upstream logo and GitHub promotion without los
   for (const control of ['commandPaletteStore.openPalette', 'uiStore.toggleSidebar', 'TenantSelector']) {
     assert.ok(sidebar.includes(control), `Missing sidebar control: ${control}`)
   }
-  for (const control of ['handleSettings', 'handleLogout', 'handleSystemAdmin', 'openDocs']) {
+  for (const control of ['handleSettings', 'handleLogout', 'handleSystemAdmin']) {
     assert.ok(userMenu.includes(control), `Missing account control: ${control}`)
   }
 })

@@ -20,12 +20,11 @@
                 <h2 class="sidebar-title">{{ title }}</h2>
                 <slot name="sidebar-header-extra" />
               </div>
-              <nav class="settings-nav" :data-guide="navGuide || undefined">
+              <nav class="settings-nav">
                 <slot name="nav">
                   <template v-for="group in navGroups" :key="group.key">
                     <div class="nav-group-title">{{ group.label }}</div>
                     <div v-for="item in group.items" :key="item.key" :class="['nav-item', { active: modelValue === item.key }]"
-                      :data-guide="navItemGuidePrefix ? `${navItemGuidePrefix}-${item.key}` : undefined"
                       @click="emit('update:modelValue', item.key)">
                       <slot name="nav-icon" :item="item" :active="modelValue === item.key">
                         <t-icon :name="item.icon" class="nav-icon" />
@@ -93,8 +92,6 @@ withDefaults(
     loading?: boolean
     zIndex?: number
     overlayClass?: string
-    navGuide?: string
-    navItemGuidePrefix?: string
   }>(),
   {
     modelValue: '',
@@ -102,8 +99,6 @@ withDefaults(
     loading: false,
     zIndex: 1100,
     overlayClass: '',
-    navGuide: '',
-    navItemGuidePrefix: '',
   },
 )
 

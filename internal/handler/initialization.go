@@ -2083,11 +2083,13 @@ func (h *InitializationHandler) checkChatModelConnection(
 
 	testMessages := []chat.Message{{Role: "user", Content: "test"}}
 	testOptions := &chat.ChatOptions{
-		MaxTokens: 1,
+		// A one-token cap can end before visible output and make a healthy
+		// provider return an empty-response error. Keep the probe small but usable.
+		MaxTokens: 512,
 		Thinking:  &[]bool{false}[0], // for dashscope.aliyuncs qwen3-32b
 	}
 
-	_, err = chatInstance.Chat(ctx, testMessages, testOptions)
+	response, err := chatInstance.Chat(ctx, testMessages, testOptions)
 	if err != nil {
 		errMsg := err.Error()
 		// 400 = endpoint reachable + auth ok, just a parameter mismatch
@@ -2103,7 +2105,10 @@ func (h *InitializationHandler) checkChatModelConnection(
 		return false, fmt.Sprintf("%s：%v", classifyConnectionError(errMsg), err)
 	}
 
-	// 连接成功，模型可用
+	if response == nil || strings.TrimSpace(response.Content) == "" {
+		return false, "模型返回了空内容，请检查模型配置及输出限制"
+	}
+	// 连接成功且取得可见回复，模型可用
 	return true, "连接正常，模型可用"
 }
 

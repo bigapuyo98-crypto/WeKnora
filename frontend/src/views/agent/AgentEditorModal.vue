@@ -2,7 +2,7 @@
   <SettingsModalShell :visible="visible"
     :title="editorMode === 'create' ? $t('agent.editor.createTitle') : $t('agent.editor.editTitle')"
     v-model="currentSection" :nav-groups="navGroups" :loading="editorInitializing" :z-index="1000"
-    nav-guide="agent-editor-sidebar" nav-item-guide-prefix="agent-editor-nav" @close="modalShell.requestClose">
+    @close="modalShell.requestClose">
     <div ref="contentWrapperRef" class="content-wrapper" :class="{ 'content-wrapper--prompts': currentSection === 'prompts' }">
       <!-- 基础设置 -->
       <div v-show="currentSection === 'basic'" class="section">
@@ -68,7 +68,7 @@
                 $t('agent.editor.normalDesc') }}</p>
             </div>
             <div class="setting-control">
-              <t-radio-group v-model="agentMode" :disabled="isBuiltinAgent" data-guide="agent-create-mode">
+              <t-radio-group v-model="agentMode" :disabled="isBuiltinAgent">
                 <t-radio-button value="quick-answer">
                   {{ $t('agent.type.normal') }}
                 </t-radio-button>
@@ -80,8 +80,7 @@
           </div>
 
           <!-- 智能体类型（仅智能推理模式下显示） -->
-          <div v-if="isAgentMode && agentTypePresets.length > 0" class="setting-row setting-row--emphasize"
-            data-guide="agent-create-agent-type">
+          <div v-if="isAgentMode && agentTypePresets.length > 0" class="setting-row setting-row--emphasize">
             <div class="setting-info">
               <label>{{ $t('agentEditor.agentType.label') }}</label>
               <p class="desc">{{ $t('agentEditor.agentType.desc') }}</p>
@@ -103,7 +102,7 @@
           </div>
 
           <!-- 名称 -->
-          <div class="setting-row" data-guide="agent-create-name">
+          <div class="setting-row">
             <div class="setting-info">
               <label>{{ $t('agent.editor.name') }} <span v-if="!isBuiltinAgent"
                   class="required">*</span></label>
@@ -549,7 +548,6 @@
           <!-- 模型选择 -->
           <div
             class="setting-row"
-            data-guide="agent-create-model"
             data-agent-field="summary_model"
             :class="{ 'setting-row--field-highlight': highlightedField === 'summary_model' }"
           >
@@ -728,7 +726,7 @@
 
         <div class="settings-group">
           <!-- 图片上传 -->
-          <div class="setting-row" data-guide="agent-create-multimodal">
+          <div class="setting-row">
             <div class="setting-info">
               <label>{{ $t('agentEditor.imageUpload.label') }}</label>
               <p class="desc">{{ $t('agentEditor.imageUpload.desc') }}</p>
@@ -1467,7 +1465,7 @@
 
         <div class="settings-group">
           <!-- 关联知识库 -->
-          <div class="setting-row" data-guide="agent-create-knowledge">
+          <div class="setting-row">
             <div class="setting-info">
               <label>{{ $t('agent.editor.knowledgeBases') }}</label>
               <p class="desc">{{ $t('agentEditor.desc.kbScope') }}</p>
@@ -1793,7 +1791,7 @@
       <t-button variant="outline" @click="modalShell.requestClose">
         {{ props.readOnly ? $t('common.close') : $t('common.cancel') }}
       </t-button>
-      <t-button v-if="!props.readOnly" theme="primary" data-guide="agent-create-submit" :loading="saving"
+      <t-button v-if="!props.readOnly" theme="primary" :loading="saving"
         :disabled="editorInitializing" @click="handleSave">
         {{ saveButtonLabel }}
       </t-button>
@@ -1821,18 +1819,12 @@
       @skills-changed="onSkillProgressChanged"
     />
   </SettingDrawer>
-
-  <AgentCreateContextualGuide :when="visible && editorMode === 'create'" :is-agent-mode="isAgentMode" />
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
-import AgentCreateContextualGuide from '@/components/AgentCreateContextualGuide.vue';
-import {
-  AGENT_EDITOR_FOCUS_SECTION_EVENT,
-  markContextualGuideDone,
-} from '@/config/contextualGuides';
+import { AGENT_EDITOR_FOCUS_SECTION_EVENT } from '@/config/contextualGuides';
 import { useI18n } from 'vue-i18n';
 import { selectInitialModelId } from '@/utils/modelDefaults';
 import { hydrateAgentPromptRefs, serializeAgentPrompts } from '@/utils/agentPromptTemplates';
@@ -4962,7 +4954,6 @@ const handleSave = async () => {
       savedAgent.value = created;
       formData.value.id = created.id;
       modalShell.markClean();
-      markContextualGuideDone('agentCreate')
       currentSection.value = 'basic';
       void loadAgentIntegrationCounts(created.id);
       MessagePlugin.success(t('agent.messages.created'));

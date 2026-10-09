@@ -28,6 +28,7 @@ const (
 // Chat Completions settings. JSON keys are the documented names used in
 // models.json and config/models.json.
 type OpenAICompletionsCompat struct {
+	SuccessDataEnvelope          *bool           `json:"success_data_envelope,omitempty"`
 	MaxTokensField               *string         `json:"max_tokens_field,omitempty"`
 	ThinkingFormat               *ThinkingFormat `json:"thinking_format,omitempty"`
 	ThinkingEnabledValue         *string         `json:"thinking_enabled_value,omitempty"`
@@ -58,6 +59,10 @@ type OpenAICompletionsCompat struct {
 
 // OpenAICompletionsSettings is the resolved (fully defaulted) form.
 type OpenAICompletionsSettings struct {
+	// SuccessDataEnvelope requires non-streaming responses to use
+	// {"success":true,"data":<ChatCompletion>}. This is opt-in per model;
+	// standard responses are never automatically unwrapped. SSE is unchanged.
+	SuccessDataEnvelope bool `json:",omitempty"`
 	// MaxTokensField is "max_tokens" or "max_completion_tokens".
 	MaxTokensField string
 	ThinkingFormat ThinkingFormat

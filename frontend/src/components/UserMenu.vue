@@ -1,7 +1,7 @@
 <template>
   <div class="user-menu" :class="{ 'user-menu--collapsed': uiStore.sidebarCollapsed }" ref="menuRef">
     <!-- 用户按钮 -->
-    <div class="user-button" data-guide="user-menu" @click="toggleMenu">
+    <div class="user-button" @click="toggleMenu">
       <div class="user-avatar">
         <img v-if="userAvatar" :src="userAvatar" :alt="$t('common.avatar')" />
         <span v-else class="avatar-placeholder">{{ userInitial }}</span>
@@ -42,12 +42,6 @@
           <div class="dropdown-user-meta">
             <div class="dropdown-user-name-row">
               <span class="dropdown-user-name">{{ userName }}</span>
-              <t-tooltip :content="$t('newUserGuide.reopen')" placement="top">
-                <button type="button" class="dropdown-guide-btn" :aria-label="$t('newUserGuide.reopen')"
-                  @click.stop="reopenGuide">
-                  <t-icon name="help-circle" size="14px" />
-                </button>
-              </t-tooltip>
             </div>
             <span v-if="userEmail" class="dropdown-user-email">{{ userEmail }}</span>
           </div>
@@ -106,17 +100,6 @@
         <div v-if="authStore.isSystemAdmin" class="menu-item" @click="handleSystemAdmin">
           <t-icon name="server" class="menu-icon" />
           <span>{{ $t('settings.navGroups.systemAdministration') }}</span>
-        </div>
-        <div class="menu-divider"></div>
-        <div class="menu-item" @click="openDocs">
-          <t-icon name="help-circle" class="menu-icon" />
-          <span class="menu-text-with-icon">
-            <span>{{ $t('general.helpAndDocs') }}</span>
-            <svg class="menu-external-icon" viewBox="0 0 16 16" aria-hidden="true">
-              <path fill="currentColor"
-                d="M12.667 8a.667.667 0 0 1 .666.667v4a2.667 2.667 0 0 1-2.666 2.666H4.667a2.667 2.667 0 0 1-2.667-2.666V5.333a2.667 2.667 0 0 1 2.667-2.666h4a.667.667 0 1 1 0 1.333h-4a1.333 1.333 0 0 0-1.333 1.333v7.334A1.333 1.333 0 0 0 4.667 13.333h6a1.333 1.333 0 0 0 1.333-1.333v-4A.667.667 0 0 1 12.667 8Zm2.666-6.667v4a.667.667 0 0 1-1.333 0V3.276l-5.195 5.195a.667.667 0 0 1-.943-.943l5.195-5.195h-2.057a.667.667 0 0 1 0-1.333h4a.667.667 0 0 1 .666.666Z" />
-            </svg>
-          </span>
         </div>
         <template v-if="!authStore.isLiteMode">
           <div class="menu-divider"></div>
@@ -202,9 +185,7 @@ import {
 import type { TenantInfo } from '@/api/tenant'
 import { useRoleLabel, useHomeTenant } from '@/composables/useRoleLabel'
 import { getRootZoom, rectToCssPx, cssViewportSize } from '@/utils/zoom'
-import { openNewUserGuide } from '@/config/contextualGuides'
 import { SETTINGS_MANAGEMENT_SHORTCUT_MIN_ROLE } from '@/config/settingsAccess'
-import { docsUrl } from '@/utils/docsUrl'
 const { t } = useI18n()
 
 const router = useRouter()
@@ -475,16 +456,6 @@ const clampFloatingToViewport = (selector: string, target: { value: Record<strin
       target.value = { ...target.value, top: `${Math.max(MARGIN, maxTop)}px` }
     }
   })
-}
-
-const reopenGuide = () => {
-  menuVisible.value = false
-  openNewUserGuide()
-}
-
-const openDocs = () => {
-  menuVisible.value = false
-  window.open(docsUrl('home'), '_blank')
 }
 
 // 注销
@@ -784,28 +755,6 @@ onUnmounted(() => {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  .dropdown-guide-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    margin: 0;
-    padding: 0;
-    border: none;
-    border-radius: var(--app-radius-xs);
-    background: transparent;
-    color: var(--td-text-color-placeholder);
-    cursor: pointer;
-    transition: background-color var(--app-motion-base) ease, color var(--app-motion-base) ease;
-
-    &:hover {
-      background: var(--td-bg-color-container-hover);
-      color: var(--td-text-color-secondary);
-    }
-  }
 }
 
 // 下拉 — 当前工作区：与下方 .menu-item 同款对齐（左 16px 图标槽 + 文案列 + 右侧操作图标）
@@ -955,24 +904,6 @@ onUnmounted(() => {
     }
   }
 
-  .menu-text-with-icon {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: inherit;
-    min-width: 0;
-
-    >span:first-of-type {
-      display: inline-flex;
-      align-items: center;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
   .menu-new-badge {
     flex-shrink: 0;
     font-size: var(--app-text-2xs);
@@ -983,19 +914,6 @@ onUnmounted(() => {
     background: var(--td-brand-color-light);
     color: var(--td-brand-color);
     letter-spacing: 0.02em;
-  }
-
-  .menu-external-icon {
-    width: 16px;
-    height: 16px;
-    color: var(--td-text-color-disabled);
-    flex-shrink: 0;
-    transition: color var(--app-motion-base) ease;
-    pointer-events: none;
-  }
-
-  &:hover .menu-external-icon {
-    color: var(--td-brand-color);
   }
 }
 
